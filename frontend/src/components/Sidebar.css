@@ -10,6 +10,20 @@
   padding: 28px 14px;
   z-index: 100;
   box-shadow: 2px 0 20px rgba(59,130,246,0.06);
+  transition: transform 0.3s ease;
+}
+
+.sidebar.mobile-open {
+  transform: translateX(0);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.4);
+  z-index: 99;
+  backdrop-filter: blur(2px);
 }
 
 .sidebar-logo {
@@ -95,6 +109,7 @@
   border-radius: 20px;
   margin-top: 8px;
 }
+
 .sidebar-user {
   display: flex;
   align-items: center;
@@ -135,3 +150,96 @@
   transition: all 0.18s;
 }
 .logout-btn:hover { background: #ffe4e6; border-color: #fca5a5; }
+
+/* Mobile topbar */
+.mobile-topbar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 98;
+  box-shadow: 0 2px 12px rgba(59,130,246,0.08);
+}
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+}
+.mobile-logo-ic {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+}
+.hamburger {
+  width: 36px; height: 36px;
+  background: var(--accentbg);
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent2);
+}
+
+/* Mobile bottom nav */
+.mobile-bottomnav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 65px;
+  background: #fff;
+  border-top: 1px solid var(--border);
+  align-items: center;
+  justify-content: space-around;
+  z-index: 98;
+  box-shadow: 0 -2px 12px rgba(59,130,246,0.08);
+  padding: 0 8px;
+}
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 20px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: var(--text3);
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.18s;
+  flex: 1;
+}
+.bottom-nav-item.active {
+  color: var(--accent);
+  background: var(--accentbg);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+    z-index: 200;
+  }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: 4px 0 30px rgba(59,130,246,0.15);
+  }
+  .sidebar-overlay {
+    display: block;
+  }
+  .mobile-topbar {
+    display: flex;
+  }
+  .mobile-bottomnav {
+    display: flex;
+  }
+}

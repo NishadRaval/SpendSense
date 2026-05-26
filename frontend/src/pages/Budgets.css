@@ -28,3 +28,10 @@
 .budget-pct { font-size: 12px; color: var(--text3); font-weight: 600; }
 
 .budget-empty { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 70px; color: var(--text3); background: #fff; border: 1px solid var(--border); border-radius: var(--radius); font-size: 14px; box-shadow: var(--shadow); }
+@media (max-width: 768px) {
+  .budget-grid { grid-template-columns: 1fr; }
+  .budget-form { flex-direction: column; }
+  .budget-form select,
+  .budget-form input { width: 100%; }
+  .page-header h1 { font-size: 22px; }
+}

@@ -224,3 +224,9 @@
   .auth-left { display: none; }
   .auth-right { width: 100%; padding: 24px; }
 }
+
+@media (max-width: 480px) {
+  .auth-right { padding: 16px; }
+  .auth-card { padding: 24px 20px; }
+  .auth-hero h1 { font-size: 28px; }
+}
