@@ -44,32 +44,34 @@
 
 ## 📸 Screenshots
 
-> Dashboard · Login · Transactions · Budgets
-> *(Drag and drop screenshots directly here on GitHub)*
+| Dashboard | Transactions |
+|-----------|-------------|
+| ![Dashboard](screenshots/dashboard.png) | ![Transactions](screenshots/transactions.png) |
+
+| Login | Budgets |
+|-------|---------|
+| ![Login](screenshots/login.png) | ![Budgets](screenshots/budgets.png) |
 
 ---
 
 ## 📂 Project Structure
+
+```
 SpendSense/
-│
 ├── backend/
-│   ├── controllers/        # Route logic
-│   ├── middleware/          # JWT auth middleware
-│   ├── models/              # Mongoose schemas
-│   ├── routes/              # Express routes
-│   ├── server.js
-│   └── .env
-│
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   └── server.js
 ├── frontend/
-│   ├── src/
-│   │   ├── api/             # Axios API calls
-│   │   ├── components/      # Sidebar, StatCard, Modal
-│   │   ├── pages/           # Dashboard, Transactions, Budgets, Auth
-│   │   └── App.jsx
-│   └── .env
-│
+│   └── src/
+│       ├── api/
+│       ├── components/
+│       ├── pages/
+│       └── App.jsx
 └── README.md
----
+```
 
 ## ⚙️ Installation & Setup
 
