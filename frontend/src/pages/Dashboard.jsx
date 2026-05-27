@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Wallet, TrendingDown, TrendingUp, PiggyBank, Plus, ArrowUpRight } from 'lucide-react'
-import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts'
+import { Wallet, TrendingDown, TrendingUp, PiggyBank, Plus } from 'lucide-react'
+import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, LineChart, Line, Legend } from 'recharts'
 import { motion } from 'framer-motion'
-import { getStats, getExpenses } from '../api/expenses'
+import { getStats, getExpenses, getMonthlyTrend } from '../api/expenses'
 import StatCard from '../components/StatCard'
 import ExpenseModal from '../components/ExpenseModal'
 import { format } from 'date-fns'
@@ -21,9 +21,9 @@ const getHour = () => {
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload?.length) {
     return (
-      <div style={{ background: '#fff', border: '1px solid #e8e8e8', borderRadius: 10, padding: '10px 14px', fontSize: 13, boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}>
-        <p style={{ color: '#737373', marginBottom: 3, fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{payload[0].payload._id || payload[0].name}</p>
-        <p style={{ color: '#0a0a0a', fontWeight: 800, fontSize: 15 }}>₹{Number(payload[0].value).toLocaleString('en-IN')}</p>
+      <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 14px', fontSize: 13, boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}>
+        <p style={{ color: 'var(--gray2)', marginBottom: 3, fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{payload[0].payload._id || payload[0].name}</p>
+        <p style={{ color: 'var(--black)', fontWeight: 800, fontSize: 15 }}>₹{Number(payload[0].value).toLocaleString('en-IN')}</p>
       </div>
     )
   }
@@ -39,13 +39,19 @@ const fadeUp = (delay = 0) => ({
 export default function Dashboard({ user }) {
   const [stats, setStats] = useState(null)
   const [recent, setRecent] = useState([])
+  const [trend, setTrend] = useState([])
   const [modal, setModal] = useState(false)
   const [month] = useState(MONTH)
 
   const load = async () => {
-    const [s, r] = await Promise.all([getStats({ month }), getExpenses({ month })])
+    const [s, r, t] = await Promise.all([
+      getStats({ month }),
+      getExpenses({ month }),
+      getMonthlyTrend()
+    ])
     setStats(s.data.data)
     setRecent(r.data.data.slice(0, 6))
+    setTrend(t.data.data)
   }
 
   useEffect(() => { load() }, [])
@@ -105,9 +111,9 @@ export default function Dashboard({ user }) {
           {stats?.categoryStats?.length > 0 ? (
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={stats.categoryStats} margin={{ top: 8, right: 8, left: -10, bottom: 0 }} barSize={32}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
-                <XAxis dataKey="_id" tick={{ fill: '#a3a3a3', fontSize: 11, fontFamily: 'Inter', fontWeight: 600 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: '#a3a3a3', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                <XAxis dataKey="_id" tick={{ fill: 'var(--gray3)', fontSize: 11, fontFamily: 'Inter', fontWeight: 600 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: 'var(--gray3)', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.03)', radius: 8 }} />
                 <Bar dataKey="total" radius={[6,6,0,0]}>
                   {stats.categoryStats.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -117,6 +123,23 @@ export default function Dashboard({ user }) {
           ) : <div className="empty-chart">No data to display</div>}
         </motion.div>
       </div>
+
+      {trend.length > 0 && (
+        <motion.div className="chart-card" style={{ marginBottom: 18 }} {...fadeUp(0.45)}>
+          <div className="chart-card-header"><h3>6-Month Trend</h3></div>
+          <ResponsiveContainer width="100%" height={240}>
+            <LineChart data={trend} margin={{ top: 8, right: 8, left: -10, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+              <XAxis dataKey="month" tick={{ fill: 'var(--gray3)', fontSize: 11, fontFamily: 'Inter', fontWeight: 600 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: 'var(--gray3)', fontSize: 11, fontFamily: 'Inter' }} axisLine={false} tickLine={false} />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend wrapperStyle={{ fontSize: 12, fontWeight: 600, color: 'var(--gray2)' }} />
+              <Line type="monotone" dataKey="income" stroke="var(--green)" strokeWidth={2.5} dot={{ fill: 'var(--green)', r: 4 }} name="Income" />
+              <Line type="monotone" dataKey="expense" stroke="var(--red)" strokeWidth={2.5} dot={{ fill: 'var(--red)', r: 4 }} name="Expenses" />
+            </LineChart>
+          </ResponsiveContainer>
+        </motion.div>
+      )}
 
       <motion.div className="recent-card" {...fadeUp(0.4)}>
         <div className="recent-card-header">

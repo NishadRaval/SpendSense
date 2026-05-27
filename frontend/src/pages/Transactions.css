@@ -45,3 +45,11 @@
   .tx-table thead th:nth-child(3), .tx-table thead th:nth-child(4),
   .tx-table tbody td:nth-child(3), .tx-table tbody td:nth-child(4) { display: none; }
 }
+
+.btn-export {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3); color: var(--gray1);
+  border: 1px solid var(--border); border-radius: var(--radius2);
+  padding: 11px 18px; font-size: 14px; font-weight: 600; transition: all 0.2s;
+}
+.btn-export:hover { background: var(--black); color: var(--bg2); border-color: var(--black); }

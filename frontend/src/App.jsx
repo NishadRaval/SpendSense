@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar'
 import Dashboard from './pages/Dashboard'
 import Transactions from './pages/Transactions'
 import Budgets from './pages/Budgets'
+import Profile from './pages/Profile'
 import Auth from './pages/Auth'
 import './App.css'
 
@@ -31,8 +32,12 @@ export default function App() {
     setPage('dashboard')
   }
 
-  if (checking) return null
+  const updateUser = (updated) => {
+    setUser(updated)
+    localStorage.setItem('user', JSON.stringify(updated))
+  }
 
+  if (checking) return null
   if (!user) return <Auth onLogin={handleLogin} />
 
   return (
@@ -42,6 +47,7 @@ export default function App() {
         {page === 'dashboard' && <Dashboard user={user} />}
         {page === 'transactions' && <Transactions />}
         {page === 'budgets' && <Budgets />}
+        {page === 'profile' && <Profile user={user} onUpdate={updateUser} />}
       </main>
     </div>
   )

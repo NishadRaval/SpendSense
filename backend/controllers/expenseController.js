@@ -108,3 +108,38 @@ exports.getStats = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+exports.getMonthlyTrend = async (req, res) => {
+  try {
+    const months = []
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date()
+      d.setMonth(d.getMonth() - i)
+      const year = d.getFullYear()
+      const month = d.getMonth()
+      const start = new Date(year, month, 1)
+      const end = new Date(year, month + 1, 0, 23, 59, 59)
+      const label = d.toLocaleString('default', { month: 'short' })
+
+      const [inc, exp] = await Promise.all([
+        Expense.aggregate([
+          { $match: { user: req.user._id, type: 'income', date: { $gte: start, $lte: end } } },
+          { $group: { _id: null, total: { $sum: '$amount' } } }
+        ]),
+        Expense.aggregate([
+          { $match: { user: req.user._id, type: 'expense', date: { $gte: start, $lte: end } } },
+          { $group: { _id: null, total: { $sum: '$amount' } } }
+        ])
+      ])
+
+      months.push({
+        month: label,
+        income: inc[0]?.total || 0,
+        expense: exp[0]?.total || 0
+      })
+    }
+    res.json({ success: true, data: months })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message })
+  }
+}

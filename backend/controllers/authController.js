@@ -53,3 +53,25 @@ exports.login = async (req, res) => {
 exports.getMe = async (req, res) => {
   res.json({ success: true, user: req.user });
 };
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const { name, email, currentPassword, newPassword } = req.body
+    const user = await User.findById(req.user._id)
+
+    if (name) user.name = name
+    if (email) user.email = email
+
+    if (newPassword) {
+      if (!currentPassword) return res.status(400).json({ success: false, message: 'Current password required' })
+      const match = await user.comparePassword(currentPassword)
+      if (!match) return res.status(400).json({ success: false, message: 'Current password is incorrect' })
+      user.password = newPassword
+    }
+
+    await user.save()
+    res.json({ success: true, user: { id: user._id, name: user.name, email: user.email } })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message })
+  }
+}

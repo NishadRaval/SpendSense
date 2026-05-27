@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Plus, Search, Pencil, Trash2, Filter } from 'lucide-react'
+import { Plus, Search, Pencil, Trash2, Filter, Download } from 'lucide-react'
 import { getExpenses, deleteExpense } from '../api/expenses'
 import ExpenseModal from '../components/ExpenseModal'
 import { format } from 'date-fns'
@@ -34,6 +34,26 @@ export default function Transactions() {
     load()
   }
 
+  const exportCSV = () => {
+    const headers = ['Title', 'Category', 'Type', 'Amount', 'Date', 'Note']
+    const rows = data.map(e => [
+      e.title,
+      e.category,
+      e.type,
+      e.amount,
+      format(new Date(e.date), 'dd MMM yyyy'),
+      e.note || ''
+    ])
+    const csv = [headers, ...rows].map(r => r.join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `spendsense-${month}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   const fmt = (n) => '₹' + Number(n).toLocaleString('en-IN')
 
   return (
@@ -43,9 +63,14 @@ export default function Transactions() {
           <h1>Transactions</h1>
           <p className="page-sub">{data.length} entries found</p>
         </div>
-        <button className="btn-primary" onClick={() => { setEditData(null); setModal(true) }}>
-          <Plus size={16} /> Add Entry
-        </button>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button className="btn-export" onClick={exportCSV}>
+            <Download size={15} /> Export CSV
+          </button>
+          <button className="btn-primary" onClick={() => { setEditData(null); setModal(true) }}>
+            <Plus size={15} /> Add Entry
+          </button>
+        </div>
       </div>
 
       <div className="filters-bar">
@@ -95,7 +120,7 @@ export default function Transactions() {
                   <td><span className="cat-tag">{e.category}</span></td>
                   <td><span className={`type-tag ${e.type}`}>{e.type}</span></td>
                   <td className="tx-date">{format(new Date(e.date), 'dd MMM yyyy')}</td>
-                  <td className={`tx-amount ${e.type}`}>{e.type === 'income' ? '+' : '-'}{fmt(e.amount)}</td>
+                  <td className={`tx-amount ${e.type}`}>{e.type === 'income' ? '+' : '−'}{fmt(e.amount)}</td>
                   <td>
                     <div className="tx-actions">
                       <button onClick={() => { setEditData(e); setModal(true) }}><Pencil size={14} /></button>
