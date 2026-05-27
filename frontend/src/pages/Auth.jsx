@@ -30,9 +30,10 @@ export default function Auth({ onLogin }) {
   return (
     <div className="auth-page">
       <div className="auth-left">
+        <div className="auth-left-pattern" />
         <div className="auth-brand">
           <div className="auth-logo">
-            <TrendingUp size={22} />
+            <TrendingUp size={18} />
           </div>
           <span>SpendSense</span>
         </div>

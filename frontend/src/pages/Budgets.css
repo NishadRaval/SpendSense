@@ -1,37 +1,35 @@
 .budgets { width: 100%; max-width: 1400px; }
 
-.budget-add-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 24px; box-shadow: var(--shadow); }
-.budget-add-card h3 { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text); }
+.budget-add-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 24px; box-shadow: var(--shadow); }
+.budget-add-card h3 { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--gray2); }
 .budget-form { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
 .budget-form select { width: 180px; }
 .budget-form input { flex: 1; min-width: 160px; }
-.budget-form .btn-primary { white-space: nowrap; flex-shrink: 0; }
 
 .budget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
 
-.budget-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); transition: all 0.2s; }
-.budget-card:hover { box-shadow: var(--shadow2); transform: translateY(-2px); border-color: var(--border2); }
-.budget-card.over { border-color: var(--redborder); background: #fffbfb; }
+.budget-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); transition: all 0.2s; cursor: default; }
+.budget-card:hover { box-shadow: var(--shadow2); transform: translateY(-2px); }
+.budget-card.over { border-color: var(--redborder); }
 
 .budget-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.budget-cat { font-size: 16px; font-weight: 800; letter-spacing: -0.2px; color: var(--text); }
+.budget-cat { font-size: 16px; font-weight: 800; letter-spacing: -0.3px; color: var(--black); }
 .budget-status { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
 .budget-status.ok { background: var(--greenbg); color: var(--green); border: 1px solid var(--greenborder); }
 .budget-status.over { background: var(--redbg); color: var(--red); border: 1px solid var(--redborder); }
 
 .budget-amounts { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
-.spent { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--text); }
-.limit { font-size: 12px; color: var(--text3); font-weight: 600; }
+.spent { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--black); font-variant-numeric: tabular-nums; }
+.limit { font-size: 12px; color: var(--gray3); font-weight: 500; }
 
-.progress-bar { background: var(--bg3); border-radius: 6px; height: 6px; overflow: hidden; margin-bottom: 10px; border: 1px solid var(--border); }
-.progress-fill { height: 100%; border-radius: 6px; transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.budget-pct { font-size: 12px; color: var(--text3); font-weight: 600; }
+.progress-bar { background: var(--bg4); border-radius: 4px; height: 4px; overflow: hidden; margin-bottom: 10px; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.7s cubic-bezier(0.34,1.56,0.64,1); }
+.budget-pct { font-size: 12px; color: var(--gray3); font-weight: 500; }
 
-.budget-empty { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 70px; color: var(--text3); background: #fff; border: 1px solid var(--border); border-radius: var(--radius); font-size: 14px; box-shadow: var(--shadow); }
+.budget-empty { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 70px; color: var(--gray3); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 14px; box-shadow: var(--shadow); }
+
 @media (max-width: 768px) {
   .budget-grid { grid-template-columns: 1fr; }
   .budget-form { flex-direction: column; }
-  .budget-form select,
-  .budget-form input { width: 100%; }
-  .page-header h1 { font-size: 22px; }
+  .budget-form select, .budget-form input { width: 100%; }
 }

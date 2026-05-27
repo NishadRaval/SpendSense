@@ -1,38 +1,38 @@
 .modal-overlay {
   position: fixed; inset: 0;
-  background: rgba(15,23,42,0.4);
+  background: rgba(0,0,0,0.5);
   display: flex; align-items: center; justify-content: center;
   z-index: 999; padding: 16px;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(4px);
 }
 .modal-box {
-  background: #ffffff;
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: 20px;
   width: 100%; max-width: 480px;
   padding: 28px;
-  box-shadow: 0 20px 60px rgba(59,130,246,0.15);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.12);
 }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
-.modal-header h3 { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; }
-.modal-close { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); padding: 7px; border-radius: 8px; display: flex; align-items: center; transition: all 0.2s; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.modal-header h3 { font-size: 20px; font-weight: 800; color: var(--black); letter-spacing: -0.4px; }
+.modal-close { background: var(--bg3); border: 1px solid var(--border); color: var(--gray2); padding: 7px; border-radius: 8px; display: flex; align-items: center; transition: all 0.2s; }
 .modal-close:hover { background: var(--redbg); color: var(--red); border-color: var(--redborder); }
 
-.modal-type-toggle { display: flex; gap: 6px; margin-bottom: 20px; background: var(--bg3); padding: 4px; border-radius: 12px; border: 1px solid var(--border); }
-.modal-type-toggle button { flex: 1; padding: 9px; border-radius: 9px; border: none; background: transparent; color: var(--text2); font-size: 14px; font-weight: 600; transition: all 0.2s; }
-.modal-type-toggle button.active { background: linear-gradient(135deg, #3b82f6, #6366f1); color: #fff; box-shadow: 0 2px 8px rgba(59,130,246,0.3); }
+.modal-type-toggle { display: flex; gap: 4px; margin-bottom: 22px; background: var(--bg3); padding: 4px; border-radius: 12px; }
+.modal-type-toggle button { flex: 1; padding: 9px; border-radius: 9px; border: none; background: transparent; color: var(--gray2); font-size: 14px; font-weight: 600; transition: all 0.2s; }
+.modal-type-toggle button.active { background: var(--black); color: #fff; }
 
 .modal-fields { display: flex; flex-direction: column; gap: 14px; }
 .field-group { display: flex; flex-direction: column; gap: 6px; }
-.field-group label { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px; }
+.field-group label { font-size: 11px; font-weight: 700; color: var(--gray3); text-transform: uppercase; letter-spacing: 0.6px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .modal-fields textarea { resize: none; }
 
 .modal-error { color: var(--red); font-size: 13px; margin-top: 12px; background: var(--redbg); border: 1px solid var(--redborder); padding: 10px 14px; border-radius: 8px; font-weight: 500; }
 
 .modal-actions { display: flex; gap: 10px; margin-top: 22px; }
-.btn-cancel { flex: 1; padding: 12px; border-radius: var(--radius2); border: 1px solid var(--border2); background: transparent; color: var(--text2); font-size: 14px; font-weight: 600; transition: all 0.2s; }
-.btn-cancel:hover { background: var(--bg3); color: var(--text); }
-.btn-save { flex: 2; padding: 12px; border-radius: var(--radius2); border: none; background: linear-gradient(135deg, #3b82f6, #6366f1); color: #fff; font-size: 14px; font-weight: 700; transition: all 0.2s; box-shadow: 0 4px 14px rgba(59,130,246,0.3); }
-.btn-save:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(59,130,246,0.4); }
-.btn-save:disabled { opacity: 0.5; transform: none; }
+.btn-cancel { flex: 1; padding: 12px; border-radius: var(--radius2); border: 1px solid var(--border2); background: transparent; color: var(--gray1); font-size: 14px; font-weight: 600; transition: all 0.2s; }
+.btn-cancel:hover { background: var(--bg3); }
+.btn-save { flex: 2; padding: 12px; border-radius: var(--radius2); border: none; background: var(--black); color: #fff; font-size: 14px; font-weight: 700; transition: all 0.2s; }
+.btn-save:hover { background: var(--black2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+.btn-save:disabled { opacity: 0.4; transform: none; }

@@ -39,7 +39,7 @@ export default function App() {
     <div className="app-layout">
       <Sidebar page={page} setPage={setPage} user={user} onLogout={handleLogout} />
       <main className="main-content">
-        {page === 'dashboard' && <Dashboard />}
+        {page === 'dashboard' && <Dashboard user={user} />}
         {page === 'transactions' && <Transactions />}
         {page === 'budgets' && <Budgets />}
       </main>
