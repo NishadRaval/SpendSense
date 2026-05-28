@@ -95,4 +95,28 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; }
   box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
 }
 
+[data-theme="dark"] .app-layout { background: var(--bg); }
+[data-theme="dark"] .modal-box { background: var(--card); }
+[data-theme="dark"] .tx-table-wrap { background: var(--card); }
+[data-theme="dark"] .auth-card { background: var(--card); }
+[data-theme="dark"] .chart-card { background: var(--card); }
+[data-theme="dark"] .stat-card { background: var(--card); }
+[data-theme="dark"] .recent-card { background: var(--card); }
+[data-theme="dark"] .recent-item:hover { background: var(--bg3); }
+[data-theme="dark"] .budget-card { background: var(--card); }
+[data-theme="dark"] .budget-add-card { background: var(--card); }
+[data-theme="dark"] .profile-card { background: var(--card); }
+[data-theme="dark"] .tx-table thead tr { background: var(--bg3); }
+[data-theme="dark"] .tx-table tbody tr:hover { background: var(--bg3); }
+[data-theme="dark"] select option { background: var(--bg3); color: var(--black); }
+[data-theme="dark"] .sidebar { background: #000000; border-right-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .mobile-topbar { background: #000000; border-bottom-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .mobile-bottomnav { background: #000000; border-top-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .pill { background: var(--bg3); border-color: var(--border); color: var(--gray2); }
+[data-theme="dark"] .pill.active { background: var(--black); color: var(--bg); border-color: var(--black); }
+[data-theme="dark"] .cat-tag { background: var(--bg3); color: var(--gray1); border-color: var(--border); }
+[data-theme="dark"] .btn-export { background: var(--bg3); color: var(--gray1); border-color: var(--border); }
+[data-theme="dark"] .btn-export:hover { background: var(--black); color: var(--bg); }
+[data-theme="dark"] .recent-count { background: var(--bg3); border-color: var(--border); color: var(--gray2); }
+
 * { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.1s ease; }

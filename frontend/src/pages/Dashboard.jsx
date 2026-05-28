@@ -21,9 +21,20 @@ const getHour = () => {
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload?.length) {
     return (
-      <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '10px 14px', fontSize: 13, boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}>
-        <p style={{ color: 'var(--gray2)', marginBottom: 3, fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{payload[0].payload._id || payload[0].name}</p>
-        <p style={{ color: 'var(--black)', fontWeight: 800, fontSize: 15 }}>₹{Number(payload[0].value).toLocaleString('en-IN')}</p>
+      <div style={{
+        background: 'var(--card)',
+        border: '1px solid var(--border)',
+        borderRadius: 10,
+        padding: '10px 14px',
+        fontSize: 13,
+        boxShadow: 'var(--shadow)'
+      }}>
+        <p style={{ color: 'var(--gray2)', marginBottom: 3, fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          {payload[0].payload._id || payload[0].name}
+        </p>
+        <p style={{ color: 'var(--black)', fontWeight: 800, fontSize: 15 }}>
+          ₹{Number(payload[0].value).toLocaleString('en-IN')}
+        </p>
       </div>
     )
   }
