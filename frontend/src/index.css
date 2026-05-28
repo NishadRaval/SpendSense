@@ -177,3 +177,81 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; }
 [data-theme="dark"] .logout-btn {
   border-color: rgba(220,38,38,0.3);
 }
+
+[data-theme="dark"] .nav-item.active {
+  background: #ffffff;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .nav-item.active svg {
+  color: #0a0a0a !important;
+  stroke: #0a0a0a !important;
+}
+[data-theme="dark"] .nav-dot {
+  background: #0a0a0a !important;
+}
+[data-theme="dark"] .btn-primary {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .btn-primary svg {
+  color: #0a0a0a !important;
+  stroke: #0a0a0a !important;
+}
+[data-theme="dark"] .logo-icon-wrap {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .logo-icon-wrap svg {
+  color: #0a0a0a !important;
+  stroke: #0a0a0a !important;
+}
+[data-theme="dark"] .user-avatar {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .profile-avatar {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .profile-save-btn {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .auth-submit {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .auth-tabs button.active {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .modal-type-toggle button.active {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .pill.active {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  border-color: #ffffff !important;
+}
+[data-theme="dark"] .bottom-nav-item.active {
+  color: #ffffff !important;
+  background: rgba(255,255,255,0.1) !important;
+}
+[data-theme="dark"] .mobile-logo {
+  color: #ffffff !important;
+}
+[data-theme="dark"] .hamburger {
+  color: #ffffff !important;
+}
+[data-theme="dark"] .sidebar-save-btn {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .btn-save {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+}
+[data-theme="dark"] .btn-save svg {
+  color: #0a0a0a !important;
+}
