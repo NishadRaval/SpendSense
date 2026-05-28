@@ -10,7 +10,7 @@ const budgetRoutes = require('./routes/budgetRoutes');
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://spendsenseweb.vercel.app'],
+  origin: true,
   credentials: true
 }));
 app.use(express.json());
