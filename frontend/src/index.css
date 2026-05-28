@@ -120,3 +120,60 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; }
 [data-theme="dark"] .recent-count { background: var(--bg3); border-color: var(--border); color: var(--gray2); }
 
 * { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.1s ease; }
+
+[data-theme="dark"] .btn-primary {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+[data-theme="dark"] .btn-primary:hover {
+  background: #e5e5e5;
+}
+[data-theme="dark"] .user-avatar {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+[data-theme="dark"] .logo-icon-wrap {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+[data-theme="dark"] .stat-icon-wrap {
+  background: var(--bg4);
+  color: var(--gray2);
+}
+[data-theme="dark"] .recent-cat-badge {
+  background: var(--bg3);
+  border-color: var(--border);
+  color: var(--gray1);
+}
+[data-theme="dark"] .profile-avatar {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+[data-theme="dark"] .tx-actions button {
+  background: var(--bg3);
+  border-color: var(--border);
+}
+[data-theme="dark"] .modal-type-toggle {
+  background: var(--bg3);
+}
+[data-theme="dark"] .modal-type-toggle button.active {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+[data-theme="dark"] .auth-tabs {
+  background: var(--bg3);
+}
+[data-theme="dark"] .auth-tabs button.active {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+[data-theme="dark"] .budget-add-card h3 {
+  color: var(--gray2);
+}
+[data-theme="dark"] .profile-save-btn {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+[data-theme="dark"] .logout-btn {
+  border-color: rgba(220,38,38,0.3);
+}
