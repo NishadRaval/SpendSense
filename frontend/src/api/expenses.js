@@ -33,3 +33,25 @@ export const getBudgets = (params) => API.get('/budgets', { params })
 export const setBudget = (data) => API.post('/budgets', data)
 export const updateProfile = (data) => API.put('/auth/profile', data)
 export const getMonthlyTrend = () => API.get('/expenses/trend')
+
+// Accounts
+export const getAccounts = () => API.get('/accounts')
+export const createAccount = (data) => API.post('/accounts', data)
+export const updateAccount = (id, data) => API.put(`/accounts/${id}`, data)
+export const deleteAccount = (id) => API.delete(`/accounts/${id}`)
+export const transferFunds = (data) => API.post('/accounts/transfer', data)
+
+// Recurring
+export const getRecurring = () => API.get('/recurring')
+export const createRecurring = (data) => API.post('/recurring', data)
+export const updateRecurring = (id, data) => API.put(`/recurring/${id}`, data)
+export const deleteRecurring = (id) => API.delete(`/recurring/${id}`)
+export const executeRecurring = () => API.post('/recurring/execute')
+
+// Bills
+export const getBills = () => API.get('/bills')
+export const getUpcomingBills = () => API.get('/bills/upcoming')
+export const createBill = (data) => API.post('/bills', data)
+export const updateBill = (id, data) => API.put(`/bills/${id}`, data)
+export const markBillPaid = (id) => API.patch(`/bills/${id}/paid`)
+export const deleteBill = (id) => API.delete(`/bills/${id}`)
