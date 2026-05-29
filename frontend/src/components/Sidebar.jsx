@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import { LayoutDashboard, ArrowLeftRight, Target, TrendingUp, LogOut, Menu, X, Moon, Sun, User } from 'lucide-react'
+import { LayoutDashboard, ArrowLeftRight, Target, TrendingUp, LogOut, Menu, X, Moon, Sun, User, Wallet, RefreshCw, Bell } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import './Sidebar.css'
 
 const nav = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'transactions', label: 'Transactions', icon: ArrowLeftRight },
+  { id: 'accounts', label: 'Accounts', icon: Wallet },
   { id: 'budgets', label: 'Budgets', icon: Target },
+  { id: 'recurring', label: 'Recurring', icon: RefreshCw },
+  { id: 'bills', label: 'Bills', icon: Bell },
   { id: 'profile', label: 'Profile', icon: User },
 ]
 
@@ -14,10 +17,7 @@ export default function Sidebar({ page, setPage, user, onLogout }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { dark, setDark } = useTheme()
 
-  const navigate = (id) => {
-    setPage(id)
-    setMobileOpen(false)
-  }
+  const navigate = (id) => { setPage(id); setMobileOpen(false) }
 
   return (
     <>
@@ -55,11 +55,7 @@ export default function Sidebar({ page, setPage, user, onLogout }) {
         <p className="sidebar-section-label">Menu</p>
         <nav className="sidebar-nav">
           {nav.map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              className={`nav-item ${page === id ? 'active' : ''}`}
-              onClick={() => navigate(id)}
-            >
+            <button key={id} className={`nav-item ${page === id ? 'active' : ''}`} onClick={() => navigate(id)}>
               <Icon size={16} />
               <span>{label}</span>
               {page === id && <span className="nav-dot" />}
@@ -80,19 +76,15 @@ export default function Sidebar({ page, setPage, user, onLogout }) {
         </button>
 
         <div className="sidebar-footer">
-          <p className="sidebar-footer-label">SpendSense v1.0 · MERN Stack</p>
+          <p className="sidebar-footer-label">SpendSense v2.0 · Phase A</p>
           <span className="sidebar-badge">● Live</span>
         </div>
       </aside>
 
       <div className="mobile-bottomnav">
-        {nav.map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            className={`bottom-nav-item ${page === id ? 'active' : ''}`}
-            onClick={() => setPage(id)}
-          >
-            <Icon size={19} />
+        {nav.slice(0, 5).map(({ id, label, icon: Icon }) => (
+          <button key={id} className={`bottom-nav-item ${page === id ? 'active' : ''}`} onClick={() => setPage(id)}>
+            <Icon size={18} />
             {label}
           </button>
         ))}

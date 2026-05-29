@@ -4,6 +4,9 @@ import Dashboard from './pages/Dashboard'
 import Transactions from './pages/Transactions'
 import Budgets from './pages/Budgets'
 import Profile from './pages/Profile'
+import Accounts from './pages/Accounts'
+import Recurring from './pages/Recurring'
+import Bills from './pages/Bills'
 import Auth from './pages/Auth'
 import './App.css'
 
@@ -47,6 +50,9 @@ export default function App() {
         {page === 'dashboard' && <Dashboard user={user} />}
         {page === 'transactions' && <Transactions />}
         {page === 'budgets' && <Budgets />}
+        {page === 'accounts' && <Accounts />}
+        {page === 'recurring' && <Recurring />}
+        {page === 'bills' && <Bills />}
         {page === 'profile' && <Profile user={user} onUpdate={updateUser} />}
       </main>
     </div>

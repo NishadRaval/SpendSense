@@ -7,9 +7,11 @@ import StatCard from '../components/StatCard'
 import ExpenseModal from '../components/ExpenseModal'
 import { format } from 'date-fns'
 import './Dashboard.css'
+import { getStats, getExpenses, getMonthlyTrend, getUpcomingBills } from '../api/expenses'
 
 const COLORS = ['#0a0a0a','#404040','#737373','#a3a3a3','#d4d4d4','#171717','#525252','#262626']
 const MONTH = new Date().toISOString().slice(0,7)
+const [upcomingBills, setUpcomingBills] = useState([])
 
 const getHour = () => {
   const h = new Date().getHours()
@@ -55,15 +57,17 @@ export default function Dashboard({ user }) {
   const [month] = useState(MONTH)
 
   const load = async () => {
-    const [s, r, t] = await Promise.all([
-      getStats({ month }),
-      getExpenses({ month }),
-      getMonthlyTrend()
-    ])
-    setStats(s.data.data)
-    setRecent(r.data.data.slice(0, 6))
-    setTrend(t.data.data)
-  }
+  const [s, r, t, b] = await Promise.all([
+    getStats({ month }),
+    getExpenses({ month }),
+    getMonthlyTrend(),
+    getUpcomingBills()
+  ])
+  setStats(s.data.data)
+  setRecent(r.data.data.slice(0, 6))
+  setTrend(t.data.data)
+  setUpcomingBills(b.data.data)
+}
 
   useEffect(() => { load() }, [])
 
@@ -180,7 +184,37 @@ export default function Dashboard({ user }) {
           </div>
         )}
       </motion.div>
-
+{upcomingBills.length > 0 && (
+  <motion.div className="recent-card" style={{ marginBottom: 18 }} {...fadeUp(0.5)}>
+    <div className="recent-card-header">
+      <h3>Upcoming Bills</h3>
+      <span className="recent-count">{upcomingBills.length} due soon</span>
+    </div>
+    <div className="recent-list">
+      {upcomingBills.map((bill, i) => {
+        const days = Math.ceil((new Date(bill.dueDate) - new Date()) / (1000*60*60*24))
+        return (
+          <motion.div key={bill._id} className="recent-item"
+            initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 + i * 0.06 }}>
+            <div className="recent-cat-badge" style={{ background: bill.status === 'Overdue' ? 'var(--redbg)' : 'var(--amberbg)', color: bill.status === 'Overdue' ? 'var(--red)' : 'var(--amber)' }}>
+              {bill.category[0]}
+            </div>
+            <div>
+              <p className="recent-title">{bill.title}</p>
+              <p className="recent-meta">{bill.category} · Due {format(new Date(bill.dueDate), 'dd MMM')}</p>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <p className="recent-amount expense">{fmt(bill.amount)}</p>
+              <p style={{ fontSize: 11, color: days < 0 ? 'var(--red)' : days <= 3 ? 'var(--amber)' : 'var(--gray3)', marginTop: 2, fontWeight: 600 }}>
+                {days < 0 ? `${Math.abs(days)}d overdue` : days === 0 ? 'Today!' : `${days}d left`}
+              </p>
+            </div>
+          </motion.div>
+        )
+      })}
+    </div>
+  </motion.div>
+)}
       <ExpenseModal open={modal} onClose={() => setModal(false)} onSaved={load} />
     </div>
   )
