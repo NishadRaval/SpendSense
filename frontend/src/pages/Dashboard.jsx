@@ -2,16 +2,14 @@ import { useState, useEffect } from 'react'
 import { Wallet, TrendingDown, TrendingUp, PiggyBank, Plus } from 'lucide-react'
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, LineChart, Line, Legend } from 'recharts'
 import { motion } from 'framer-motion'
-import { getStats, getExpenses, getMonthlyTrend } from '../api/expenses'
+import { getStats, getExpenses, getMonthlyTrend, getUpcomingBills } from '../api/expenses'
 import StatCard from '../components/StatCard'
 import ExpenseModal from '../components/ExpenseModal'
 import { format } from 'date-fns'
 import './Dashboard.css'
-import { getStats, getExpenses, getMonthlyTrend, getUpcomingBills } from '../api/expenses'
 
 const COLORS = ['#0a0a0a','#404040','#737373','#a3a3a3','#d4d4d4','#171717','#525252','#262626']
 const MONTH = new Date().toISOString().slice(0,7)
-const [upcomingBills, setUpcomingBills] = useState([])
 
 const getHour = () => {
   const h = new Date().getHours()
@@ -55,18 +53,24 @@ export default function Dashboard({ user }) {
   const [trend, setTrend] = useState([])
   const [modal, setModal] = useState(false)
   const [month] = useState(MONTH)
+  const [upcomingBills, setUpcomingBills] = useState([])
 
   const load = async () => {
-  const [s, r, t, b] = await Promise.all([
-    getStats({ month }),
-    getExpenses({ month }),
-    getMonthlyTrend(),
-    getUpcomingBills()
-  ])
-  setStats(s.data.data)
-  setRecent(r.data.data.slice(0, 6))
-  setTrend(t.data.data)
-  setUpcomingBills(b.data.data)
+  try {
+    const [s, r, t, b] = await Promise.all([
+      getStats({ month }),
+      getExpenses({ month }),
+      getMonthlyTrend(),
+      getUpcomingBills()
+    ])
+
+    setStats(s.data.data)
+    setRecent(r.data.data.slice(0, 6))
+    setTrend(t.data.data)
+    setUpcomingBills(b.data.data || [])
+  } catch (err) {
+    console.error('Dashboard load error:', err)
+  }
 }
 
   useEffect(() => { load() }, [])
